@@ -4,10 +4,12 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
   }
 
+  // Prefer the server env var; fall back to client-supplied key for local/dev.
   const body = (req.body ?? {}) as any;
   const apiKey = process.env.OPENAI_API_KEY || body.apiKey || "";
   if (!apiKey) return res.status(500).json({ ok: false, error: "Missing OPENAI_API_KEY" });
 
+  // Accept either {prompt} or {q}
   const raw = typeof body.prompt === "string" ? body.prompt : (typeof body.q === "string" ? body.q : "");
   const prompt = (raw || "").trim();
   if (!prompt) return res.status(400).json({ ok: false, error: "Missing prompt" });
