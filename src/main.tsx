@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+
+// Keep both if you use them
 import "./index.css";
-import "./styles.css"; // your consolidated CSS with .content-viewport, .post, etc.
+import "./styles.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
